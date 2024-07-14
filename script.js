@@ -1,10 +1,29 @@
-const box = document.getElementById("app")
+const box = document.getElementById("box")
 
 window.addEventListener("resize", firstDraw)
 
 const COL = .5, PXL = 80, MIN = .2, SPN = 0.6, LIM = .8, col = ["#d20218", "#34487a", "#ffd203", "#000"]
 
+let bar = false
+toggleBar()
+
+document.getElementById("oBarButton").addEventListener("click", toggleBar)
+window.addEventListener("keydown", (e) => {
+    if (e.code == "Space") {
+        toggleBar()
+    }
+})
+
+function toggleBar() {
+    bar = !bar 
+    let width = Math.floor(box.clientWidth / box.clientHeight * (box.clientHeight-180))
+    document.querySelector("body").style.gridTemplateRows = bar ? "1fr 200px" : "1fr 20px"
+    console.log(width.toString())
+    box.style.width = bar ? width.toString() + "px": "calc(100% - 40px)"
+}
+
 let nCol, nRow, lim
+
 
 function draw() {
     box.innerHTML = ""
@@ -55,11 +74,13 @@ function draw() {
             elm.remove()
         } else if (Math.random() > COL) {
             elm.style.backgroundColor = col[Math.floor(Math.random() * col.length)]
+        } else {
+            elm.style.backgroundColor = "#fff"
         }
     })
 }
 
-window.addEventListener("click", () => {
+box.addEventListener("click", () => {
     drawReq()
 })
 

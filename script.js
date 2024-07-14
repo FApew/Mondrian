@@ -5,7 +5,6 @@ window.addEventListener("resize", firstDraw)
 const COL = .5, PXL = 80, MIN = .2, SPN = 0.6, LIM = .8, col = ["#d20218", "#34487a", "#ffd203", "#000"]
 
 let bar = false
-toggleBar()
 
 document.getElementById("oBarButton").addEventListener("click", toggleBar)
 window.addEventListener("keydown", (e) => {

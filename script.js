@@ -9,9 +9,13 @@ const Tspn = document.getElementById("oTxtSPN")
 const Imin = document.getElementById("oInMIN")
 const Tmin = document.getElementById("oTxtMIN")
 
+const Isave = document.getElementById("oSave")
+
 let InArr = [Icol, Ipxl, Ispn, Imin]
 
 let COL = .5, PXL = 80, SPN = .6, MIN = .2, col = ["#d20218", "#34487a", "#ffd203", "#000"]
+
+Isave.addEventListener("click",save)
 
 InArr.forEach((I) => {
     I.addEventListener("input", () => {
@@ -141,6 +145,21 @@ function draw() {
         } else {
             elm.style.backgroundColor = "#fff"
         }
+    })
+}
+
+function save() {
+    console.log("ciao")
+    html2canvas(box).then(canvas => {
+        const url = canvas.toDataURL("image/png")
+        const link = document.createElement("a")
+
+        link.download = "FAmondrian.png"
+        link.href = url
+
+        document.body.appendChild(link)
+        link.click()
+        document.body.removeChild(link)
     })
 }
 
